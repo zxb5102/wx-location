@@ -1,0 +1,8 @@
+
+  <map id='mapList' longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" scale="14" style="width: 100%; height:100%;" show-location='true' markers='{{markers}}' controls='{{controls}}' bindcontroltap="controltap" bindmarkertap="markertap"
+    bindcallouttap="callouttap" bindregionchange='regionchange'></map>
+
+
+<!--<view class="needle-wrap">
+  <image src='/images/needle.png' class='needle'></image>
+</view>-->

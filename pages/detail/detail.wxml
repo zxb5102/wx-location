@@ -1,0 +1,80 @@
+<view class="show-item">
+
+
+  <!-- 基地基本信息展示 -->
+
+  <view class="detail-top-item">
+    <view class="wrap-jidi-img">
+      <image src="/images/jidi.jpg" style="border-radius:50%;" class="img" mode='aspectFill'></image>
+    </view>
+    <view style='padding-top:30rpx'>八大山人基地</view>
+  </view>
+
+
+
+
+
+
+
+  <!--图片 + 文字  地址显示 -->
+  <navigator style="padding-bottom:10rpx;padding-top:10rpx;" bindtap="showLocation">
+    <view class="img-font-wrap">
+      <image src='/images/location.png' class="img-font"></image>
+      <text style='overflow:hidden;white-space:nowrap;width:500rpx; text-overflow:ellipsis'>江西省南昌市南昌县青云谱大道会城商务会所</text>
+      <text style="flex:1"></text>
+      <view class="navigator-arrow"></view>
+    </view>
+  </navigator>
+
+
+
+
+  <!--图片 + 文字  电话显示  -->
+  <navigator bindtap="callPhone">
+    <view class="img-font-wrap">
+      <image src='/images/phone.png' class="img-font"></image>
+      <text style='flex:1'>0797-88233233 (魏老师)</text>
+      <view class="navigator-arrow"></view>
+    </view>
+  </navigator>
+
+
+  <!--图片 + 文字   门店照片显示-->
+  <view class="img-font-wrap">
+    <image src='/images/pic.png' class="img-font"></image>
+    <text>门店照片</text>
+  </view>
+
+
+
+</view>
+
+
+<!--图片列表-->
+<view class="img-list">
+
+
+  <view class="wrap-img">
+    <image bindtap="clickImg" src="/images/tar.jpg" class="img" mode='aspectFill'></image>
+  </view>
+
+
+  <view class="wrap-img">
+    <image bindtap="clickImg" src="/images/tar.jpg" class="img" mode='aspectFill'></image>
+  </view>
+
+
+  <view class="wrap-img">
+    <image bindtap="clickImg" src="/images/tar.jpg" class="img" mode='aspectFill'></image>
+  </view>
+
+
+  <view class="wrap-img">
+    <image bindtap="clickImg" src="/images/tar.jpg" class="img" mode='aspectFill'></image>
+  </view>
+
+  <view class="wrap-img">
+    <image bindtap="clickImg" src="/images/tar.jpg" class="img" mode='aspectFill'></image>
+  </view>
+
+</view>

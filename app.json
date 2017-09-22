@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "pages/map/map",
+    "pages/index/index",
+    "pages/detail/detail",
+    "pages/logs/logs"
+    
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/item-gray.png",
+        "selectedIconPath": "images/item-green.png",
+        "text": "列表"
+      },
+      {
+        "pagePath": "pages/map/map",
+        "iconPath": "images/map-gray.png",
+        "selectedIconPath": "images/map-green.png",
+        "text": "地图"
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+/* pages/map/map.wxss */
+.map-view{
+  width: 100%;
+  height:100%;
+}
+.map{
+  width:100%;
+  height:1000rpx;
+}
+page{
+  height: 100%;
+}
+.needle-wrap{
+  position:fixed;top:50%;left:50%
+}
+.needle{
+  height:50rpx;width:50rpx
+}

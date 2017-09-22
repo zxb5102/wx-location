@@ -1,0 +1,34 @@
+<scroll-view scroll-y='true' bindscrolltolower='loadMore' bindscroll='scroll' style='height:100%;'>
+  <navigator url="/pages/detail/detail" wx:for="{{items}}" wx:for-index="idx" wx:for-item="item" wx:key="key">
+    <view class="item">
+
+      <view class='wrap-img'>
+        <image src="{{item.thumbImg}}" class='img' mode='aspectFill'></image>
+      </view>
+
+
+      <view class='item-desc'>
+        <view class="item-desc-each">{{item.baseName}}{{idx}}</view>
+
+        <view class='location-font'>
+          <image src="/images/location.png" style="height:34rpx;width:34rpx" mode='aspectFit'></image>
+          <view class="item-desc-each" style="color:#888888">距你{{item.distance}}Km</view>
+        </view>
+
+        <view class="item-desc-each" style='color:#515151'>{{item.location}}</view>
+      </view>
+
+    </view>
+
+  </navigator>
+  <view style="height:60px" wx:if='{{once}}'>
+    <view wx:if="{{hasMore}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">
+      <icon type="waiting" size="45" />
+      <text>加载中...</text>
+    </view>
+    <view wx:else style="display:flex;align-items: baseline;justify-content:center">
+      <text>没有更多内容了</text>
+    </view>
+  </view>
+
+</scroll-view>
