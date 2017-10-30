@@ -1,8 +1,66 @@
 
-  <map id='mapList' longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" scale="14" style="width: 100%; height:100%;" show-location='true' markers='{{markers}}' controls='{{controls}}' bindcontroltap="controltap" bindmarkertap="markertap"
-    bindcallouttap="callouttap" bindregionchange='regionchange'></map>
+<wxs src="../index/index.wxs" module="tools" />
+<map id='mapList' longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" scale="14" style="width: 100%; height:50%;" show-location='true' markers='{{markers}}' controls='{{controls}}' bindcontroltap="controltap" bindmarkertap="markertap"
+   bindregionchange='regionchange'  >
+</map>
+
+<view style='height:1%'></view>
+<scroll-view scroll-y='true'  style='height:49%;'>
+
+  <view wx:for="{{items}}" wx:for-index="idx" wx:for-item="item" wx:key="fdId" bindtap="tapItem" data-fdName="{{item.fdName}}" data-fdHeadTeacherPhone="{{item.fdHeadTeacherPhone}}" data-fdBaseThumbImg="{{item.fdBaseThumbImg}}" data-fdHeadTeacher="{{item.fdHeadTeacher}}"
+    data-fdAddress="{{item.fdAddress}}" data-paintingPhotos="{{item.paintingPhotos}}" data-basePhotos="{{item.basePhotos}}" data-fdLongitude="{{item.fdLongitude}}" data-fdLatitude="{{item.fdLatitude}}" data-fdBaseThumbImg="{{item.fdBaseThumbImg}}" class='wrap-item'>
+    <view class="item">
+
+      <view class='wrap-img'>
+        <image src="{{item.fdBaseThumbImg}}" class='img' mode='aspectFill'></image>
+      </view>
 
 
-<!--<view class="needle-wrap">
-  <image src='/images/needle.png' class='needle'></image>
-</view>-->
+      <view class='item-desc'>
+
+        <view style='display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:16rpx'>
+          <view style='flex:1'>
+            <view class="item-desc-each" style='color:#333333'>{{item.fdName}}</view>
+            <view class='location-font'>
+              <image src="/images/001_12.png" style="height:20rpx;width:20rpx" mode='aspectFit'></image>
+              <view class="item-desc-each" style="color:#999999;margin-left:10rpx">距你{{tools.cut(item.fdDistance)}}千米</view>
+            </view>
+          </view>
+          <!--<view capture-catch:tap='quickCall' data-phone='{{item.fdHeadTeacherPhone}}'>
+            <image src='/images/0_05.png' mode='aspectFit' style='height:70rpx;width:70rpx'></image>
+          </view>-->
+        </view>
+
+        <!--老师信息的显示-->
+        <view id='{{idx}}' class="item-desc-each" style='color:#515151;display:flex;align-items:baseline'>
+          <!--<text style='margin-right:27rpx' class='item-desc-each-each'>{{item.fdHeadTeacher}}老师</text>-->
+
+          <!--<text style='margin-right:26rpx' class='item-desc-each-each'>|</text>
+          <text style='' class='item-desc-each-each'>{{item.fdHeadTeacherPhone}}</text>-->
+          <!--<text style='flex:1' wx:if="{{item.fdHeadTeacherPhone != null}}">{{item.fdHeadTeacherPhone}}</text>
+          <image src='/images/phone-index.png' style='height:30rpx;width:30rpx'></image>-->
+        </view>
+
+        <view class='cont'>
+          {{item.fdAddress}}
+          <!--<text style='width:100%;text-overflow: ellipsis;white-space: nowrap;'>{{item.fdAddress}}</text>-->
+        </view>
+
+      </view>
+
+    </view>
+
+  </view>
+  
+  
+    <view wx:if="{{isLoading}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">
+      <!--<icon type="waiting" size="45" />
+      <text>加载中...</text>-->
+      <image src='/images/001.gif' mode='center' style='height:100rpx;width:100rpx'></image>
+    </view>
+    <!--<view wx:else style="display:flex;align-items: baseline;justify-content:center">
+      <text>没有更多内容了</text>
+    </view>-->
+  
+
+</scroll-view>

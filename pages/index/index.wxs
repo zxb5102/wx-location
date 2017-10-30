@@ -1,0 +1,10 @@
+var cut = function (str) {
+  var s = str + "";
+  var str = s.substring(0, s.indexOf(".") + 2);
+  return str;
+}
+
+
+module.exports = {
+  cut: cut
+};

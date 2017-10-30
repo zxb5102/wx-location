@@ -1,4 +1,6 @@
 /* pages/map/map.wxss */
+/*@import "../index/index.wxss";*/
+/*下面是地图样式的特有样式*/
 .map-view{
   width: 100%;
   height:100%;
@@ -15,4 +17,85 @@ page{
 }
 .needle{
   height:50rpx;width:50rpx
+}
+/*下面是覆盖掉的样式*/
+.img {
+  /*border-radius: 50%;*/
+  height: 100%;
+  width: 100%;
+}
+
+.wrap-img {
+  height: 150rpx;
+  width: 150rpx;
+  
+}
+
+.item {
+  font-size: 34rpx;
+  padding: 10rpx 0 10rpx 30rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.item-desc {
+  margin-left: 40rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 500rpx;
+  padding-bottom:10rpx;
+  border-bottom:2rpx solid #eeeeee;
+
+}
+
+.item-desc-each {
+  width: 100%;
+  display: flex
+  
+}
+
+.img-fontP {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+.location-font {
+  display: flex;
+  align-items: baseline;
+  margin-top: 16rpx;
+  
+}
+
+.index-logo {
+  
+  width: 100%;
+}
+
+
+.index-hd {
+  text-align: center;
+}
+
+
+.index-desc {
+  margin-top: 20rpx;
+  color: #888888;
+  font-size: 28rpx;
+}
+.wrap-item{
+  margin-top:27rpx;
+  margin-bottom: 27rpx;
+}
+.item-desc-each-each{
+  color:#333333;
+  
+}
+/*超出内容后显示省略号*/
+.cont{
+overflow: hidden;/*内容超出后隐藏*/
+text-overflow: ellipsis;/* 超出内容显示为省略号*/
+white-space: nowrap;/*文本不进行换行*/
 }

@@ -1,80 +1,80 @@
-<view class="show-item">
-
+<view id='img'>
+  <image src="/images/head_faze.jpg" mode='widthFix' style="width:100%"></image>
+</view>
+<view style='margin-top:-{{marginValue}}px'>
 
   <!-- 基地基本信息展示 -->
-
   <view class="detail-top-item">
     <view class="wrap-jidi-img">
-      <image src="/images/jidi.jpg" style="border-radius:50%;" class="img" mode='aspectFill'></image>
+      <image src="{{fdBaseThumbImg}}" style="border-radius:50%;" class="img" mode='aspectFill'></image>
     </view>
-    <view style='padding-top:30rpx'>八大山人基地</view>
+    <view style='padding-top: 15px;color: #ffffff;font-weight: bold;'>{{fdBaseName}}</view>
   </view>
+</view>
 
-
-
-
-
-
+<view style='margin-top:80rpx' class='show-item'>
 
   <!--图片 + 文字  地址显示 -->
-  <navigator style="padding-bottom:10rpx;padding-top:10rpx;" bindtap="showLocation">
+  <navigator bindtap="showLocation" class="each">
     <view class="img-font-wrap">
-      <image src='/images/location.png' class="img-font"></image>
-      <text style='overflow:hidden;white-space:nowrap;width:500rpx; text-overflow:ellipsis'>江西省南昌市南昌县青云谱大道会城商务会所</text>
-      <text style="flex:1"></text>
-      <view class="navigator-arrow"></view>
+      <image src='/images/02_03.png' class="img-font"></image>
+      <text style='overflow:hidden;white-space:nowrap;width:500rpx; text-overflow:ellipsis'>{{fdAddress}}</text>
+      <view class="navigator-arrow" style='flex:1;margin-left:80rpx;display:flex;align-self:center;'></view>
     </view>
   </navigator>
 
+
+
+  <!--图片 + 文字  联系人显示  -->
+  <view class="img-font-wrap" class="each">
+    <image src='/images/2_09.png' class="img-font"></image>
+    <text style='flex:1'>{{fdHeadTeacher}}</text>
+  </view>
 
 
 
   <!--图片 + 文字  电话显示  -->
-  <navigator bindtap="callPhone">
+  <view bindtap="callPhone" wx:if="{{fdHeadTeacherPhone != null}}" class="each">
     <view class="img-font-wrap">
-      <image src='/images/phone.png' class="img-font"></image>
-      <text style='flex:1'>0797-88233233 (魏老师)</text>
-      <view class="navigator-arrow"></view>
+      <image src='/images/0_05.png' class="img-font"></image>
+      <text style='width:500rpx;align-self:baseline'>{{fdHeadTeacherPhone}}</text>
+      <view class="navigator-arrow" style='margin-left:80rpx;flex:1;display:flex;align-self:center;'></view>
     </view>
-  </navigator>
-
-
-  <!--图片 + 文字   门店照片显示-->
-  <view class="img-font-wrap">
-    <image src='/images/pic.png' class="img-font"></image>
-    <text>门店照片</text>
   </view>
 
 
 
-</view>
-
-
-<!--图片列表-->
-<view class="img-list">
-
-
-  <view class="wrap-img">
-    <image bindtap="clickImg" src="/images/tar.jpg" class="img" mode='aspectFill'></image>
+  <!--图片 + 文字   产地照片显示-->
+  <view class="img-font-wrap each">
+    <image src='/images/2_21.png' class="img-font"></image>
+    <text>产地照片</text>
   </view>
 
 
-  <view class="wrap-img">
-    <image bindtap="clickImg" src="/images/tar.jpg" class="img" mode='aspectFill'></image>
+
+  <!--产地图片列表-->
+  <view class='each' wx:if="{{basePhotos.length > 0}}">
+    <view class="img-list ">
+
+
+      <view class="wrap-img" wx:for="{{basePhotos}}" wx:for-index="idx" wx:for-item="item">
+        <image id='basePhotos-{{idx}}' bindtap="clickImg" src="{{item}}" class="img" mode='aspectFill'></image>
+      </view>
+
+    </view>
+  </view>
+  <!--图片 + 文字   作品照片显示-->
+  <view class="img-font-wrap each">
+    <image src='/images/2_21.png' class="img-font"></image>
+    <text>采摘照片</text>
   </view>
 
-
-  <view class="wrap-img">
-    <image bindtap="clickImg" src="/images/tar.jpg" class="img" mode='aspectFill'></image>
+  <!--采果图片列表-->
+  <view class='each' wx:if="{{paintingPhotos.length > 0}}">
+    <view class="img-list" >
+      <view class="wrap-img" wx:for="{{paintingPhotos}}" wx:for-index="idx" wx:for-item="item">
+        <image id='paintingPhotos-{{idx}}' bindtap="clickImg" src="{{item}}" class="img" mode='aspectFill'></image>
+      </view>
+    </view>
   </view>
-
-
-  <view class="wrap-img">
-    <image bindtap="clickImg" src="/images/tar.jpg" class="img" mode='aspectFill'></image>
-  </view>
-
-  <view class="wrap-img">
-    <image bindtap="clickImg" src="/images/tar.jpg" class="img" mode='aspectFill'></image>
-  </view>
-
 </view>

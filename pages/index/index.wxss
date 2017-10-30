@@ -12,6 +12,7 @@ page{
 .wrap-img {
   height: 150rpx;
   width: 150rpx;
+  
 }
 
 .item {
@@ -29,12 +30,14 @@ page{
   justify-content: flex-start;
   width: 500rpx;
   padding-bottom:10rpx;
-  border-bottom:1rpx dotted #888888;
+  border-bottom:2rpx solid #eeeeee;
 
 }
 
 .item-desc-each {
   width: 100%;
+  display: flex
+  
 }
 
 .img-fontP {
@@ -46,6 +49,31 @@ page{
 .location-font {
   display: flex;
   align-items: baseline;
-  margin-top: 10rpx;
+  margin-top: 16rpx;
+  
+}
+
+.index-logo {
+  
+  width: 100%;
+}
+
+
+.index-hd {
+  text-align: center;
+}
+
+
+.index-desc {
+  margin-top: 20rpx;
+  color: #888888;
+  font-size: 28rpx;
+}
+.wrap-item{
+  margin-top:44rpx;
   margin-bottom: 10rpx;
+}
+.item-desc-each-each{
+  color:#333333;
+  
 }

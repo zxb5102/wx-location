@@ -1,33 +1,31 @@
 {
   "pages": [
-    "pages/map/map",
     "pages/index/index",
-    "pages/detail/detail",
-    "pages/logs/logs"
-    
+    "pages/map/map",
+    "pages/detail/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "赣南脐橙",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "color": "#7A7E83",
-    "selectedColor": "#3cc51f",
+    "color": "#999999",
+    "selectedColor": "#FF7A00",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/item-gray.png",
-        "selectedIconPath": "images/item-green.png",
+        "iconPath": "images/003_03.png",
+        "selectedIconPath": "images/001_17.png",
         "text": "列表"
       },
       {
         "pagePath": "pages/map/map",
-        "iconPath": "images/map-gray.png",
-        "selectedIconPath": "images/map-green.png",
+        "iconPath": "images/001_19.png",
+        "selectedIconPath": "images/003_05.png",
         "text": "地图"
       }
     ]

@@ -1,142 +1,212 @@
 //index.js
 //获取应用实例
 const app = getApp()
-var data = require('./load');
-
+import testData from '../../utils/testData.json.js';
 Page({
   data: {
     items: [],
-    all: 0,
-    page: 0,
+    total: 0,
+    page: 1,
     pageSize: 10,
     hasMore: true,
     once: false,
-    motto: 'Hello World',
     loadding: false,
-    userInfo: {},
-    hasUserInfo: false,
-    testCount: 0,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
-  },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+    urlAddress: '',
+    latitude: '',
+    longitude: ''
   },
   onLoad: function () {
 
     var page = this;
 
-    wx.showLoading({
-      title: '加载中....',
-      icon: 'loading',
-      mask: true
+    var app = getApp();
+    page.setData({
+      urlAddress: app.globalData.urlAddress
     });
 
-    setTimeout(function () {
+    //获取用户的经纬度
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        var latitude = res.latitude
+        var longitude = res.longitude
+        page.setData({
+          latitude: latitude,
+          longitude: longitude
+        });
+      },
+      fail: function () {
+        //获取用户的信息失败   默认设置
+        page.setData({
+          latitude: 28.6046480209,
+          longitude: 115.9149456024
+        });
+      }, complete: function () {
+        //请求等待的时候显示等待加载中.....
+        wx.showLoading({
+          title: '加载中....',
+          icon: 'loading',
+          mask: true
+        });
+        //请求后台数据
+        wx.request({
+          url: page.data.urlAddress, //仅为示例，并非真实的接口地址
+          data: {
+            pageSize: page.data.pageSize,
+            page: page.data.page,
+            fdLatitude: page.data.latitude,
+            fdLongitude: page.data.longitude
+          },
+          header: {
+            'content-type': 'application/json' // 默认值
+          },
+          success: function (res) {
 
-      //初次渲染数据
-      wx.hideLoading();
-      page.setData({
-        items: data.items,
-        all: 10,
-        once: true,
-        loadding: false
-      });
-
-    }, 1000);
-
-
-
-
-
-
-
-
-
-
-    //console.log(123);
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
+          },
+          complete: function () {
+            var res = new Object();
+            res.data = testData;
+            //渲染完成 解除等待显示
+            wx.hideLoading();
+            ;
+            //解析后台返回的 json  数据
+            page.setData({
+              items: res.data.items,
+              total: res.data.total,
+              once: true,
+              page: page.data.page + 1
+            });
+            //判断是否还有数据
+            if (page.data.total == page.data.items.length) {
+              page.setData({
+                hasMore: false
+              });
+            }
+          }
         })
       }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
+    });
+
+  },
+  //快速拨打电话号码
+  quickCall: function (event) {
+    var phone = event.currentTarget.dataset.phone;
+    //判断电话号码是否可用
+    if (phone != null) {
+      wx.makePhoneCall({
+        phoneNumber: phone
       })
     }
+
   },
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
+
   loadMore: function (event) {
 
-    //console.log(this.data.hasMore);
     if ((!this.data.loadding) && this.data.hasMore) {
+
+      //防止多次触底 触发多次
       this.setData({
         loadding: true
       });
-
-//      console.log(1);
-
       var page = this;
 
-      /*wx.showLoading({
-        title: '加载中....',
-        icon: 'loading',
-        mask: true
-      });*/
+      //请求后台数据
+      wx.request({
+        url: page.data.urlAddress, //仅为示例，并非真实的接口地址
+        data: {
+          pageSize: page.data.pageSize,
+          page: page.data.page,
+          fdLatitude: page.data.latitude,
+          fdLongitude: page.data.longitude
+        },
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success: function (res) {
 
-      setTimeout(function () {
+        },
+        fail: function () {
 
+        },
+        complete: function (res) {
 
-        wx.hideLoading();
-        var items = page.data.items.concat(data.items);
-        //设置数据
-        page.setData({
-          items: items,
-          all: 10,
-          loadding: false
-        });
-        //设置数据次数
-
-        var testCount2 = page.data.testCount;
-        page.setData({
-          testCount: testCount2 + 1
-        });
-        //判断是否还有数据
-        if (page.data.testCount == 2) {
+          var res = new Object();
+          res.data = testData;
+          //解析后台返回的 json  数据
+          var items = page.data.items.concat(res.data.items);//拼接上原来的数据
           page.setData({
-            hasMore: false
+            items: items,
+            all: res.data.total,
+            loadding: false,
+            page: page.data.page + 1
           });
-        }
 
-      }, 1000);
+          //判断是否还有数据
+          if (page.data.total == page.data.items.length) {
+            page.setData({
+              hasMore: false
+            });
+          }
+
+        }
+      })
+
 
     }
+  },
+  //点击跳转到详细页面
+  tapItem: function (event) {
+
+    var dataset = event.currentTarget.dataset;
+    var url = '/pages/detail/detail?';
+    var ary = new Array();
+    if (dataset.fdname != null) {
+      ary.push("fdBaseName=" + dataset.fdname);
+    }
+
+    if (dataset.fdaddress != null) {
+      ary.push("fdAddress=" + dataset.fdaddress);
+    }
+
+    if (dataset.fdheadteacher != null) {
+      ary.push("fdHeadTeacher=" + dataset.fdheadteacher);
+    }
+
+    if (dataset.fdheadteacherphone != null) {
+      ary.push("fdHeadTeacherPhone=" + dataset.fdheadteacherphone);
+    }
+
+    if (dataset.paintingphotos.length > 0) {
+      ary.push("paintingPhotos=" + dataset.paintingphotos);
+    }
+
+    if (dataset.basephotos.length > 0) {
+      ary.push("basePhotos=" + dataset.basephotos);
+    }
+
+
+    if (dataset.fdlongitude != null) {
+      ary.push("fdLongitude=" + dataset.fdlongitude);
+    }
+
+    if (dataset.fdlatitude != null) {
+      ary.push("fdLatitude=" + dataset.fdlatitude);
+    }
+
+
+
+    if (dataset.fdbasethumbimg != null) {
+      ary.push("fdBaseThumbImg=" + dataset.fdbasethumbimg);
+    }
+
+    ary.forEach(function (val, index, ary) {
+      url += val + '&';
+    });
+    url = url.substring(0, url.lastIndexOf('&'));
+
+    wx.navigateTo({
+      url: url
+    })
   },
   scroll: function (event) {
 
